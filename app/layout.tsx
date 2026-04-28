@@ -1,9 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { QueryProvider } from "./providers/QueryProvider";
+import { AuthProvider } from "./providers/AuthProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "CloudDrive",
@@ -16,12 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <html lang="en" className={outfit.variable}>
+      <body className={`${outfit.className} antialiased font-sans`}>
         <QueryProvider>
-          {children}
+          <AuthProvider>{children}</AuthProvider>
         </QueryProvider>
       </body>
     </html>
-  );  
+  );
 }
